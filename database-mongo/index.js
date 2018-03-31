@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect('mongodb://localhost/mvp');
 
 var db = mongoose.connection;
 
@@ -11,12 +11,12 @@ db.once('open', function() {
   console.log('mongoose connected successfully');
 });
 
-var itemSchema = mongoose.Schema({
-  quantity: Number,
+var ticketSchema = mongoose.Schema({
+  headline: Number,
   description: String
 });
 
-var Item = mongoose.model('Item', itemSchema);
+var Item = mongoose.model('Ticket', ticketSchema);
 
 var selectAll = function(callback) {
   Item.find({}, function(err, items) {

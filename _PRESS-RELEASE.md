@@ -1,4 +1,4 @@
-# Project Name #
+# MVP Project #
 
 <!-- 
 > This material was originally posted [here](http://www.quora.com/What-is-Amazons-approach-to-product-development-and-product-management). It is reproduced here for posterities sake.
@@ -16,29 +16,36 @@ Oh, and I also like to write press-releases in what I call "Oprah-speak" for mai
 Once the project moves into development, the press release can be used as a touchstone; a guiding light. The product team can ask themselves, "Are we building what is in the press release?" If they find they're spending time building things that aren't in the press release (overbuilding), they need to ask themselves why. This keeps product development focused on achieving the customer benefits and not building extraneous stuff that takes longer to build, takes resources to maintain, and doesn't provide real customer benefit (at least not enough to warrant inclusion in the press release).
  -->
  
-## Heading ##
-  > Name the product in a way the reader (i.e. your target customers) will understand.
+## Support Ticket Tracker ##
+This program records and organizes user-submitted support tickets.
 
-## Sub-Heading ##
-  > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
-
+## Market & Benefit ##
+This program is designed for companies to efficiently manage support requests.
 ## Summary ##
-  > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+This is a platform for capturing, prioritizing, answering and resolving support requests.
 
 ## Problem ##
-  > Describe the problem your product solves.
+It behooves companies to offer quality support to their customers. Disorganized support loses customers and hurts the company. Possible problems:
+
+- confusing submission process frustrates and turns customers away
+- poor prioritization strategy frustrates customers with urgent problems
+- tickets are not sent to the right department and needlessly delay resolution
 
 ## Solution ##
-  > Describe how your product elegantly solves the problem.
+This product solves these problems in the following ways:
+
+- simple, informative submission process
+- sophisticated prioritization strategy takes urgency and submit time / date into account
+- tickets can be categorized to ensure the right department finds them
 
 ## Quote from You ##
-  > A quote from a spokesperson in your company.
+  > This product can increase customer satisfaction and retention.
 
 ## How to Get Started ##
-  > Describe how easy it is to get started.
+To use this product, set up a MongoDB server, clone the repository from GitHub onto your web server, and run `npm install` and then `npm start [IP address of MongoDB server if not localhost]`
 
 ## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+  > We polled our customers that contacted our support department through our previous ticket tracker, and only 76% said they were satisfied with their experience. Then we switched to this program and satisfaction increased to 88%. My colleagues in the support department say that it makes tracking tickets very easy.
 
 ## Closing and Call to Action ##
-  > Wrap it up and give pointers where the reader should go next.
+Contact us if you would like to see a demonstration or if you are interested in a free 30 day trial.
