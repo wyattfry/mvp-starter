@@ -13,19 +13,51 @@ db.once('open', function() {
 
 var ticketSchema = mongoose.Schema({
   headline: Number,
-  description: String
+  description: String,
+  createdAt: Date,
+  priority: String,
+  category: String,
+  email: String,
+  supportEmployeeId: Number,
+  status: String,
+  history: String,
+  resolved: Boolean,
+  resolvedAt: Date,
 });
 
-var Item = mongoose.model('Ticket', ticketSchema);
+var Ticket = mongoose.model('Ticket', ticketSchema);
 
 var selectAll = function(callback) {
-  Item.find({}, function(err, items) {
+  Ticket.find({}, function(err, tickets) {
     if(err) {
       callback(err, null);
     } else {
-      callback(null, items);
+      callback(null, tickets);
+    }
+  });
+};
+
+var selectOne = function(callback) {
+  // TODO finish writing
+  Ticket.find({_id: id}, function(err, tickets) {
+    if(err) {
+      callback(err, null);
+    } else {
+      callback(null, tickets);
+    }
+  });
+};
+
+var save = function(obj, callback) {
+  // TODO flesh out
+  Ticket.save(obj, function(err, tickets) {
+    if(err) {
+      callback(err, null);
+    } else {
+      callback(null, tickets);
     }
   });
 };
 
 module.exports.selectAll = selectAll;
+module.exports.save = save;
