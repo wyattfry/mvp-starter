@@ -17,6 +17,7 @@ var ticketSchema = mongoose.Schema({
   createdAt: Date,
   priority: String,
   category: String,
+  name: String,
   email: String,
   supportEmployeeId: Number,
   status: String,
