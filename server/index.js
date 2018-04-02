@@ -2,9 +2,11 @@ var express = require('express');
 var bodyParser = require('body-parser');
 // UNCOMMENT THE DATABASE YOU'D LIKE TO USE
 // var items = require('../database-mysql');
-var tickets = require('../database-mongo');
+var db = require('../database-mongo');
 
 var app = express();
+
+app.use(bodyParser.json());
 
 // UNCOMMENT FOR REACT
 app.use('/:page', express.static(__dirname + '/../react-client/dist'));
@@ -26,7 +28,7 @@ app.use('/check-ticket-status/:ticket', express.static(__dirname + '/../react-cl
 // });
 
 app.get('/api/tickets', function (req, res) {
-  tickets.selectAll(function(err, data) {
+  db.selectAll(function(err, data) {
     if(err) {
       res.sendStatus(500);
     } else {
@@ -37,7 +39,7 @@ app.get('/api/tickets', function (req, res) {
 
 app.get('/api/tickets/:id', function (req, res) {
   // TODO implement getting info from one ticket
-  tickets.selectOne(function(err, data) {
+  db.selectOne(function(err, data) {
     if(err) {
       res.sendStatus(500);
     } else {
@@ -46,13 +48,21 @@ app.get('/api/tickets/:id', function (req, res) {
   });
 });
 
-app.post('/api/tickets', function (req, res) {
-  tickets.selectAll(function(err, data) {
-    if(err) {
-      res.sendStatus(500);
-    } else {
-      res.json(data);
-    }
+// app.post('/api/tickets', function (req, res) {
+//   console.log('received API POST request...\n', req);
+//   tickets.save(req.body, function(err) {
+//     if(err) {
+//       res.sendStatus(500);
+//     }
+//     res.sendStatus(200);
+//   });
+// });
+
+app.post('/api/tickets', function(request, response){
+  console.log('express: received POST req, body:\n', request.body);      // your JSON
+  db.save(request.body, err => {
+    if (err) response.status(500);
+    response.send(request.body);    // echo the result back
   });
 });
 

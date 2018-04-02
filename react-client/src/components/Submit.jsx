@@ -9,19 +9,21 @@ class Submit extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleSubmit(e) {
-    console.log('handleSubmit:', e);
     const ticket = {
       headline: $('.headline').val(),
       description: $('.description').val(),
       createdAt: Date.now(),
-      priority: String,
-      category: String,
+      priority: $('.priority-select').val(),
+      category: $('.category-select').val(),
       name: $('.name').val(),
       email: $('.email').val(),
       status: 'open',
       resolved: false,
     };
-
+    console.log('ticket', ticket);
+    axios.post('/api/tickets', ticket)
+      .then(res => {console.log('POSTed new ticket\n', res)})
+      .catch(err => {console.error('Could not POST new ticket\n', err)});
   }
   render() {
     return (
@@ -32,16 +34,16 @@ class Submit extends React.Component {
           <input className='headline' type='text' placeholder='Problem summary' /><br />
           <textarea className='description' type='text' placeholder='description' /><br />
           <span>Priority:</span><br />
-          <select>
-            <option>High</option>
-            <option>Medium</option>
-            <option>Low</option>
+          <select className='priority-select'>
+            <option value='high'>High</option>
+            <option value='medium'>Medium</option>
+            <option value='low'>Low</option>
           </select><br />
           <span>Category:</span><br />
-          <select>
-            <option>Sales</option>
-            <option>Service</option>
-            <option>General</option>
+          <select className='category-select'>
+            <option value='sales'>Sales</option>
+            <option value='service'>Service</option>
+            <option value='general'>General</option>
           </select><br />
           <button className='submit-button' onClick={this.handleSubmit}>Submit</button>
         <ul>

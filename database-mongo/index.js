@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
 mongoose.connect('mongodb://localhost/mvp');
 
 var db = mongoose.connection;
@@ -12,7 +13,7 @@ db.once('open', function() {
 });
 
 var ticketSchema = mongoose.Schema({
-  headline: Number,
+  headline: String,
   description: String,
   createdAt: Date,
   priority: String,
@@ -27,6 +28,8 @@ var ticketSchema = mongoose.Schema({
 });
 
 var Ticket = mongoose.model('Ticket', ticketSchema);
+
+
 
 var selectAll = function(callback) {
   Ticket.find({}, function(err, tickets) {
@@ -51,12 +54,10 @@ var selectOne = function(callback) {
 
 var save = function(obj, callback) {
   // TODO flesh out
-  Ticket.save(obj, function(err, tickets) {
-    if(err) {
-      callback(err, null);
-    } else {
-      callback(null, tickets);
-    }
+  console.log('Mongoose: saving record...');
+  Ticket.create(obj, (err, ticket) => {
+    if (err) console.log('Mongoose: error creating document\n', err);
+    else console.log('Mongoose: creating document...');
   });
 };
 
