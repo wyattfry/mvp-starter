@@ -12,7 +12,6 @@ class App extends React.Component {
       items: []
     }
   }
-
   componentDidMount() {
     $.ajax({
       url: '/api/tickets', 
@@ -27,7 +26,6 @@ class App extends React.Component {
     });
   }
   getSelectedTicket() {
-    console.log()
     if (window.location.pathname.split('/').length === 4) {
       return <span>Ticket #{window.location.pathname.split('/')[2]}</span>
     }
@@ -35,7 +33,7 @@ class App extends React.Component {
   }
   render () {
     if (window.location.pathname.split('/')[1] === 'dashboard') {
-        return <Dashboard />;
+        return <Dashboard tickets={this.state.items} />;
     }
     if (window.location.pathname === '/check-ticket-status/') {
       return (<div>

@@ -17,7 +17,11 @@ Once the project moves into development, the press release can be used as a touc
  -->
  
 ## Support Ticket Tracker ##
-This program records and organizes user-submitted support tickets.
+This program records and organizes user-submitted support tickets. It features:
+
+- [a dashboard](http://localhost:3000/dashboard/)
+- [a ticket submit page](http://localhost:3000/submit/)
+- [a ticket status page](http://localhost:3000/check-ticket-status/)
 
 ## Market & Benefit ##
 This program is designed for companies to efficiently manage support requests.

@@ -3,9 +3,19 @@ import ListItem from './ListItem.jsx';
 
 const List = (props) => (
   <div>
-    <h4> List Component </h4>
-    There are { props.items.length } items.
-    { props.items.map(item => <ListItem item={item}/>)}
+    System contains { props.items.length } ticket(s).
+    <table>
+      <tbody>
+        <tr>
+          <th>ID</th>
+          <th>Status</th>
+          <th>Priority</th>
+          <th>User Name</th>
+          <th>Headline</th>
+        </tr>
+    { props.items.map(item => <ListItem item={item} handleClick={props.handleClick} />)}
+      </tbody>
+    </table>
   </div>
 )
 
