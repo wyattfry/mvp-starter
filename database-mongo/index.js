@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+const Promise = require('bluebird');
 mongoose.Promise = require('bluebird');
 mongoose.connect('mongodb://localhost/mvp');
 
@@ -55,10 +56,19 @@ var selectOne = function(callback) {
 var save = function(obj, callback) {
   // TODO flesh out
   console.log('Mongoose: saving record...');
-  Ticket.create(obj, (err, ticket) => {
-    if (err) console.log('Mongoose: error creating document\n', err);
-    else console.log('Mongoose: creating document...');
+  return new Promise((resolve, reject) => {
+    Ticket.create(obj, (err, ticket) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(ticket);
+      }
+    });
   });
+  // Ticket.create(obj, (err, ticket) => {
+  //   if (err) console.log('Mongoose: error creating document\n', err);
+  //   else callback(ticket);
+  // });
 };
 
 module.exports.selectAll = selectAll;

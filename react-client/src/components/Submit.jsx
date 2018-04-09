@@ -20,9 +20,17 @@ class Submit extends React.Component {
       status: 'open',
       resolved: false,
     };
-    console.log('ticket', ticket);
+    $('.headline').val('');
+    $('.description').val('');
+    $('.priority-select').selectedIndex = 0;
+    $('.category-select').selectedIndex = 0;
+    $('.name').val('');
+    $('.email').val('');
     axios.post('/api/tickets', ticket)
-      .then(res => {console.log('POSTed new ticket\n', res)})
+      .then(res => {
+        // console.log('POSTed new ticket\n', res);
+        $('.alertToUserSpan').html(`Thank you for submitting a ticket. Your ticked ID number is <strong>${res.data._id}</strong>`);
+      })
       .catch(err => {console.error('Could not POST new ticket\n', err)});
   }
   render() {
@@ -45,7 +53,8 @@ class Submit extends React.Component {
             <option value='service'>Service</option>
             <option value='general'>General</option>
           </select><br />
-          <button className='submit-button' onClick={this.handleSubmit}>Submit</button>
+          <button className='submit-button' onClick={this.handleSubmit}>Submit</button><br />
+          <span className='alertToUserSpan' />
         <ul>
           <li><a href='/check-ticket-status/'>Check status of a ticket</a></li>
           <li><a href='/dashboard/'>Go to dashboard</a></li>

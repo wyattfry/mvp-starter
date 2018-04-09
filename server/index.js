@@ -58,12 +58,11 @@ app.get('/api/tickets/:id', function (req, res) {
 //   });
 // });
 
-app.post('/api/tickets', function(request, response){
+app.post('/api/tickets', (request, response) => {
   console.log('express: received POST req, body:\n', request.body);      // your JSON
-  db.save(request.body, err => {
-    if (err) response.status(500);
-    response.send(request.body);    // echo the result back
-  });
+  db.save(request.body)
+    .then(data => response.json(data))
+    .catch((err) => response.sendStatus(500));
 });
 
 // app.get('/submit', function (req, res) {
