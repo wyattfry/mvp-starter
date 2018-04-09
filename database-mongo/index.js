@@ -1,9 +1,9 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 const Promise = require('bluebird');
 mongoose.Promise = require('bluebird');
 mongoose.connect('mongodb://localhost/mvp');
 
-var db = mongoose.connection;
+const db = mongoose.connection;
 
 db.on('error', function() {
   console.log('mongoose connection error');
@@ -13,7 +13,7 @@ db.once('open', function() {
   console.log('mongoose connected successfully');
 });
 
-var ticketSchema = mongoose.Schema({
+const ticketSchema = mongoose.Schema({
   headline: String,
   description: String,
   createdAt: Date,
@@ -28,11 +28,9 @@ var ticketSchema = mongoose.Schema({
   resolvedAt: Date,
 });
 
-var Ticket = mongoose.model('Ticket', ticketSchema);
+const Ticket = mongoose.model('Ticket', ticketSchema);
 
-
-
-var selectAll = function(callback) {
+const selectAll = function(callback) {
   Ticket.find({}, function(err, tickets) {
     if(err) {
       callback(err, null);
@@ -42,19 +40,7 @@ var selectAll = function(callback) {
   });
 };
 
-var selectOne = function(callback) {
-  // TODO finish writing
-  Ticket.find({_id: id}, function(err, tickets) {
-    if(err) {
-      callback(err, null);
-    } else {
-      callback(null, tickets);
-    }
-  });
-};
-
-var save = function(obj, callback) {
-  // TODO flesh out
+const save = function(obj, callback) {
   console.log('Mongoose: saving record...');
   return new Promise((resolve, reject) => {
     Ticket.create(obj, (err, ticket) => {
@@ -65,11 +51,24 @@ var save = function(obj, callback) {
       }
     });
   });
-  // Ticket.create(obj, (err, ticket) => {
-  //   if (err) console.log('Mongoose: error creating document\n', err);
-  //   else callback(ticket);
-  // });
 };
+
+const update = (id, obj) => {
+  return new Promise((resolve, reject) => {
+    Ticket.findById(id)
+      .then((t) => {
+        t.set(obj);
+        t.save((err, ticket) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(ticket);
+          }
+        });
+      })
+  });
+}
 
 module.exports.selectAll = selectAll;
 module.exports.save = save;
+module.exports.update = update;

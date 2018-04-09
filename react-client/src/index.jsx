@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import $ from 'jquery';
+import axios from 'axios';
 import List from './components/List.jsx';
 import Submit from './components/Submit.jsx';
 import Dashboard from './components/Dashboard.jsx';
@@ -13,23 +13,9 @@ class App extends React.Component {
     }
   }
   componentDidMount() {
-    $.ajax({
-      url: '/api/tickets', 
-      success: (data) => {
-        this.setState({
-          items: data
-        })
-      },
-      error: (err) => {
-        console.log('err', err);
-      }
-    });
-  }
-  getSelectedTicket() {
-    if (window.location.pathname.split('/').length === 4) {
-      return <span>Ticket #{window.location.pathname.split('/')[2]}</span>
-    }
-    return <span>None selected</span>
+    axios.get('/api/tickets')
+      .then(data => this.setState({items: data.data}))
+      .catch(err => console.log('Failed loading tickets\n', err))
   }
   render () {
     if (window.location.pathname.split('/')[1] === 'dashboard') {
@@ -47,7 +33,7 @@ class App extends React.Component {
         <a href='/submit/'>Go to ticket submit page</a>
       </div>)
     }
-    if (window.location.pathname === '/' || window.location.pathname === '/submit/') {
+    if (window.location.pathname === '/submit/') {
       return <Submit />;
     }
   }

@@ -1,3 +1,23 @@
-tr:hover td {
+tr.ticketList:hover td {
   background: #aaa;
+}
+
+.headerColumn {
+  text-align: right;
+  font-weight: bold;
+}
+
+.high {
+  background-color: crimson;
+  color: white;
+}
+
+.medium {
+  background-color: indianred;
+  color: white;
+}
+
+.low {
+  background-color: salmon;
+  color: white;
 }

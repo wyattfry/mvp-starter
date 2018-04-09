@@ -13,7 +13,7 @@ const List = (props) => (
           <th>User Name</th>
           <th>Headline</th>
         </tr>
-    { props.items.map(item => <ListItem item={item} handleClick={props.handleClick} />)}
+    { props.items.map(item => <ListItem key={ item._id } item={item} handleClick={props.handleClick} />)}
       </tbody>
     </table>
   </div>
