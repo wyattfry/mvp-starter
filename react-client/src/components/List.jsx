@@ -3,7 +3,7 @@ import ListItem from './ListItem.jsx';
 
 const List = (props) => (
   <div>
-    System contains { props.items.length } ticket(s).
+    Total: { props.items.length } ticket(s).
     <table>
       <tbody>
         <tr>

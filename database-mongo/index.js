@@ -41,7 +41,6 @@ const selectAll = function(callback) {
 };
 
 const save = function(obj, callback) {
-  console.log('Mongoose: saving record...');
   return new Promise((resolve, reject) => {
     Ticket.create(obj, (err, ticket) => {
       if (err) {

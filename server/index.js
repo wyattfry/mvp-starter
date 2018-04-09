@@ -1,8 +1,10 @@
-var express = require('express');
-var bodyParser = require('body-parser');
+const express = require('express');
+const bodyParser = require('body-parser');
 
-var db = require('../database-mongo');
-var app = express();
+const db = require('../database-mongo');
+const app = express();
+const PORT = process.env.PORT || 3000;
+
 app.use(bodyParser.json());
 app.use('/:page', express.static(__dirname + '/../react-client/dist'));
 app.use('/dashboard/:ticket', express.static(__dirname + '/../react-client/dist'));
@@ -37,7 +39,6 @@ app.get('/api/tickets', function (req, res) {
 
 // Create a new ticket
 app.post('/api/tickets', (request, response) => {
-  console.log('express: received POST req, body:\n', request.body);
   db.save(request.body)
     .then(data => response.json(data))
     .catch(err => response.sendStatus(500));
@@ -45,13 +46,12 @@ app.post('/api/tickets', (request, response) => {
 
 // Update an existing ticket
 app.put('/api/tickets', (request, response) => {
-  console.log('express: received PUT req, body:\n', request.body);
   db.update(request.body._id, request.body)
     .then(data => response.json(data))
     .catch((err) => response.sendStatus(500));
 });
 
-app.listen(3000, function() {
-  console.log('listening on port 3000!');
+app.listen(PORT, function() {
+  console.log(`Express: listening on port ${PORT}!`);
 });
 

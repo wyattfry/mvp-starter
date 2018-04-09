@@ -4,6 +4,7 @@ import $ from 'jquery';
 
 import List from './List.jsx';
 
+// Move DetailViewer to its own file
 const DetailViewer = props => (
   <div>
     <table>
@@ -57,8 +58,10 @@ class Dashboard extends React.Component {
       <h2>Selected Ticket</h2>
       {$.isEmptyObject(this.state.selectedTicket) ? <span>None selected</span> : <DetailViewer closeTicket={this.closeTicket} ticket={this.state.selectedTicket} />}
       <h2>Open tickets</h2>
-      <List items={ this.props.tickets } handleClick={this.handleClick} />
-      <a href='/submit/'>Go to ticket submit page</a>
+      <List items={ this.props.tickets.filter(ticket => !ticket.resolved) } handleClick={this.handleClick} />
+      <h2>Closed tickets</h2>
+      <List items={ this.props.tickets.filter(ticket => ticket.resolved) } handleClick={this.handleClick} />
+      <ul><li><a href='/submit/'>Go to ticket submit page</a></li></ul>
     </div>)
   }
 }
