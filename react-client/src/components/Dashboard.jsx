@@ -53,7 +53,7 @@ class Dashboard extends React.Component {
     }
   }
   render () {
-    return (<div>
+    return (<div className="tile">
       <h1>Support Ticket System Dashboard</h1>
       <h2>Selected Ticket</h2>
       {$.isEmptyObject(this.state.selectedTicket) ? <span>None selected</span> : <DetailViewer closeTicket={this.closeTicket} ticket={this.state.selectedTicket} />}

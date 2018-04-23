@@ -35,19 +35,19 @@ class Submit extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div className="tile">
         <h1>Submit a support ticket</h1>
           <input className='name' type='text' placeholder='Your name' autoComplete='name' /><br />
           <input className='email' type='text' placeholder='Your email address' autoComplete='email' /><br />
           <input className='headline' type='text' placeholder='Problem summary' /><br />
           <textarea className='description' type='text' placeholder='description' /><br />
-          <span>Priority:</span><br />
+          <span>Priority:</span>
           <select className='priority-select'>
             <option value='high'>High</option>
             <option value='medium'>Medium</option>
             <option value='low'>Low</option>
           </select><br />
-          <span>Category:</span><br />
+          <span>Category:</span>
           <select className='category-select'>
             <option value='sales'>Sales</option>
             <option value='service'>Service</option>
